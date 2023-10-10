@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Calculadora</string>
+    <string name="NumberOne">1</string>
+    <string name="NumberTwo">2</string>
+    <string name="NumberThree">3</string>
+    <string name="NumberFour">4</string>
+    <string name="NumberFive">5</string>
+    <string name="NumberSix">6</string>
+    <string name="NumberSeven">7</string>
+    <string name="NumberEight">8</string>
+    <string name="NumberNine">9</string>
+    <string name="NumberZero">0</string>
+    <string name="SimbolPlus">+</string>
+    <string name="SimbolMinus">-</string>
+    <string name="SimbolMultiply">*</string>
+    <string name="SimbolDivide">/</string>
+    <string name="SimbolClean">C</string>
+    <string name="SimbolEqual">=</string>
+</resources>
