@@ -6,14 +6,32 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    private int numberOne = 0, numberTwo, result;
+
+    private double firstNumber;
+
+    private String operation;
 
 
-    private Button buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonZero, buttonEqual, buttonPlus, buttonClen;
+    private Button buttonOne;
+    private Button buttonTwo;
+    private Button buttonThree;
+    private Button buttonFour;
+    private Button buttonFive;
+    private Button buttonSix;
+    private Button buttonSeven;
+    private Button buttonEight;
+    private Button buttonNine;
+    private Button buttonZero;
+    private Button buttonPlus;
+    private Button buttonSub;
 
     private TextView resultView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,85 +47,83 @@ public class MainActivity extends AppCompatActivity {
         buttonEight = findViewById(R.id.buttonNumberEight);
         buttonNine = findViewById(R.id.buttonNumberNine);
         buttonZero = findViewById(R.id.buttonNumberZero);
-        buttonEqual = findViewById(R.id.buttonSimbolEqual);
+
+        buttonSub = findViewById(R.id.buttonSimbolSubtract);
+        Button buttonEqual = findViewById(R.id.buttonSimbolEqual);
         buttonPlus = findViewById(R.id.buttonSimbolPlus);
-        buttonClen = findViewById(R.id.buttonSimbolClean);
+        Button buttonClen = findViewById(R.id.buttonSimbolClean);
 
         resultView = findViewById(R.id.resultView);
 
+        List<Button> nums = new ArrayList<Button>() {{
+            add(buttonOne);
+            add(buttonTwo);
+            add(buttonThree);
+            add(buttonFour);
+            add(buttonFive);
+            add(buttonSix);
+            add(buttonSeven);
+            add(buttonEight);
+            add(buttonNine);
+            add(buttonZero);
+        }};
 
-        buttonOne.setOnClickListener(v -> {
-            if(numberOne == 0 ){
-                numberOne = 1;
-                resultView.setText(R.string.NumberOne);
 
-            }else{
-                numberTwo = 1;
-                //resultView.setText(resultView.getText(), R.string.SimbolPlus, R.string.NumberOne);
-            }
+        for (Button n : nums) {
+            n.setOnClickListener(view -> {
+                if (!resultView.getText().toString().equals("0") && firstNumber == 0) {
+                    resultView.setText(resultView.getText().toString() + n.getText().toString());
+                } else {
+                    resultView.setText(n.getText().toString());
+                }
+            });
+        }
 
+
+        List<Button> simbols = new ArrayList<Button>() {{
+            add(buttonPlus);
+            add(buttonSub);
+        }};
+
+        for (Button s : simbols) {
+            s.setOnClickListener(view -> {
+
+                if (firstNumber == 0) {
+                    firstNumber = Integer.parseInt(resultView.getText().toString());
+                    operation = s.getText().toString();
+                    resultView.setText("0");
+                }else{
+                    operation();
+                    operation = s.getText().toString();
+                    resultView.setText("0");
+                }
+
+
+            });
+        }
+
+        buttonClen.setOnClickListener(view -> {
+            firstNumber = 0;
+            resultView.setText("0");
         });
 
-        buttonTwo.setOnClickListener(v -> {
-            numberOne = 2;
+        buttonEqual.setOnClickListener(view -> {
+            operation();
+            resultView.setText(String.valueOf(firstNumber));
         });
 
-        buttonThree.setOnClickListener(v -> {
-            numberOne = 3;
-        });
-
-        buttonFour.setOnClickListener(v -> {
-            numberOne = 4;
-        });
-
-        buttonFive.setOnClickListener(v -> {
-            numberOne = 5;
-        });
-
-        buttonSix.setOnClickListener(v -> {
-            numberOne = 6;
-        });
-
-        buttonSeven.setOnClickListener(v -> {
-            numberOne = 7;
-        });
-
-        buttonEight.setOnClickListener(v -> {
-            numberOne = 8;
-        });
-
-        buttonNine.setOnClickListener(v -> {
-            numberOne = 9;
-        });
-
-        buttonZero.setOnClickListener(v -> {
-            numberOne = 0;
-        });
-
-        buttonEqual.setOnClickListener(v -> {
-            resultView.setText(result);
-        });
-
-        buttonClen.setOnClickListener(v -> {
-            clean();
-        });
-
-        buttonPlus.setOnClickListener(v -> {
-            plusMethod();
-        });
     }
 
-
-
-    private void plusMethod(){
-        result = numberOne + numberTwo;
-    }
-
-    private void clean(){
-        numberOne = 0;
-        numberTwo = 0;
-        result = 0;
-        resultView.setText("");
+    private void operation() {
+        double secondNumber = Double.parseDouble(resultView.getText().toString());
+        double result = 0;
+        switch (operation) {
+            case "+" -> result = firstNumber + secondNumber;
+            case "-" -> result = firstNumber - secondNumber;
+            default -> result = firstNumber;
+        }
+        operation = "";
+        firstNumber = result;
     }
 
 
