@@ -14,8 +14,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private List<String> calc = new ArrayList<>();
+    private Calculator calculator = new Calculator();
 
-    private String operation;
+    private String valueNumber = "";
+
     private TextView resultView;
 
     @SuppressLint("SetTextI18n")
@@ -24,16 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button    buttonOne = findViewById(R.id.buttonNumberOne);
-        Button    buttonTwo = findViewById(R.id.buttonNumberTwo);
-        Button    buttonThree = findViewById(R.id.buttonNumberThree);
-        Button    buttonFour = findViewById(R.id.buttonNumberFour);
-        Button    buttonFive = findViewById(R.id.buttonNumberFive);
-        Button    buttonSix = findViewById(R.id.buttonNumberSix);
-        Button    buttonSeven = findViewById(R.id.buttonNumberSeven);
-        Button    buttonEight = findViewById(R.id.buttonNumberEight);
-        Button    buttonNine = findViewById(R.id.buttonNumberNine);
-        Button    buttonZero = findViewById(R.id.buttonNumberZero);
+        Button buttonOne = findViewById(R.id.buttonNumberOne);
+        Button buttonTwo = findViewById(R.id.buttonNumberTwo);
+        Button buttonThree = findViewById(R.id.buttonNumberThree);
+        Button buttonFour = findViewById(R.id.buttonNumberFour);
+        Button buttonFive = findViewById(R.id.buttonNumberFive);
+        Button buttonSix = findViewById(R.id.buttonNumberSix);
+        Button buttonSeven = findViewById(R.id.buttonNumberSeven);
+        Button buttonEight = findViewById(R.id.buttonNumberEight);
+        Button buttonNine = findViewById(R.id.buttonNumberNine);
+        Button buttonZero = findViewById(R.id.buttonNumberZero);
 
         Button buttonSub = findViewById(R.id.buttonSimbolSubtract);
         Button buttonEqual = findViewById(R.id.buttonSimbolEqual);
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     resultView.setText(n.getText().toString());
                 }
+                valueNumber += n.getText().toString();
             });
         }
 
@@ -79,13 +82,28 @@ public class MainActivity extends AppCompatActivity {
         //Si el primer numero es 0, se guarda el numero en la variable firstNumber
         for (Button s : simbols) {
             s.setOnClickListener(view -> {
+                String operante = s.getText().toString();
 
-                calc.add(resultView.getText().toString());
+
+                    if (calc.isEmpty()) {
+                        // Si la lista está vacía, agrega el número seguido del operador
+                        calc.add(valueNumber);
+                        calc.add(operante);
+                    } else if(!valueNumber.equals("")){
+                        String lastItem = calc.get(calc.size() - 1);
+                        if (isOperator(lastItem)) {
+                            calc.add(valueNumber);
+                            calc.add(operante);
+                        } else {
+                            // El último elemento no es un operador, por lo que el usuario debe estar ingresando un nuevo operador
+                            calc.add(operante);
+                            calc.add(valueNumber);
+                        }
+                    }
+                    resultView.setText(resultView.getText().toString() + s.getText().toString()); // Limpia la pantalla
+                valueNumber = "";
 
 
-                calc.add(s.getText().toString());
-
-                resultView.setText("0");
 
             });
         }
@@ -94,19 +112,23 @@ public class MainActivity extends AppCompatActivity {
         //Limpia la pantalla y la variable firstNumber
         buttonClen.setOnClickListener(view -> {
             calc.clear();
+            valueNumber = "";
             resultView.setText("0");
         });
 
         //Llama a la funcion operation() y muestra el resultado en pantalla
         buttonEqual.setOnClickListener(view -> {
+            calc.add(valueNumber);
+            valueNumber = "";
+            resultView.setText(String.valueOf(calculator.calcular(calc)));
 
-            resultView.setText(String.valueOf(calc));
         });
 
     }
 
-    /**
-     * Realiza la operacion correspondiente
-     */
+
+    private boolean isOperator(String text) {
+        return text.equals("+") || text.equals("-") || text.equals("*") || text.equals("/");
+    }
 
 }
