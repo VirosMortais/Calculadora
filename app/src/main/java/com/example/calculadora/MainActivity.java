@@ -13,7 +13,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    private double firstNumber;
+    private List<String> calc = new ArrayList<>();
 
     private String operation;
     private TextView resultView;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonEqual = findViewById(R.id.buttonSimbolEqual);
         Button buttonPlus = findViewById(R.id.buttonSimbolPlus);
         Button buttonClen = findViewById(R.id.buttonSimbolClean);
+        Button buttonMult = findViewById(R.id.buttonSimbolMultiply);
 
         resultView = findViewById(R.id.resultView);
 
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         List<Button> simbols = new ArrayList<>() {{
             add(buttonPlus);
             add(buttonSub);
+            add(buttonMult);
         }};
 
         //Hago la operacion correspondiente si se presiona un simbolo y el primer numero es diferente de 0
@@ -78,13 +80,11 @@ public class MainActivity extends AppCompatActivity {
         for (Button s : simbols) {
             s.setOnClickListener(view -> {
 
-                if (firstNumber == 0) {
-                    firstNumber = Integer.parseInt(resultView.getText().toString());
-                }else{
-                    operation();
-                }
+                calc.add(resultView.getText().toString());
 
-                operation = s.getText().toString();
+
+                calc.add(s.getText().toString());
+
                 resultView.setText("0");
 
             });
@@ -93,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Limpia la pantalla y la variable firstNumber
         buttonClen.setOnClickListener(view -> {
-            firstNumber = 0;
+            calc.clear();
             resultView.setText("0");
         });
 
         //Llama a la funcion operation() y muestra el resultado en pantalla
         buttonEqual.setOnClickListener(view -> {
-            operation();
-            resultView.setText(String.valueOf(firstNumber));
+
+            resultView.setText(String.valueOf(calc));
         });
 
     }
@@ -108,17 +108,5 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Realiza la operacion correspondiente
      */
-    private void operation() {
-        double secondNumber = Double.parseDouble(resultView.getText().toString());
-        double result ;
-        switch (operation) {
-            case "+" -> result = firstNumber + secondNumber;
-            case "-" -> result = firstNumber - secondNumber;
-            default -> result = firstNumber;
-        }
-        operation = "";
-        firstNumber = result;
-    }
-
 
 }

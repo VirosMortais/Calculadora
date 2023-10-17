@@ -29,14 +29,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:text="@string/NumberOne"
         android:gravity="center_vertical|center_horizontal"
+        android:onClick="addChar"
         android:padding="0dp"
+        android:text="@string/NumberOne"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonNumberFour"
         app:layout_constraintEnd_toStartOf="@id/buttonNumberTwo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultView"/>
+        app:layout_constraintTop_toBottomOf="@+id/resultView" />
 
     <Button
         android:id="@+id/buttonNumberTwo"
@@ -75,7 +76,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="0dp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSimbolSubtract"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSimbolMultiply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonNumberThree"
         app:layout_constraintTop_toBottomOf="@+id/resultView"/>
@@ -122,6 +123,21 @@
         app:layout_constraintStart_toEndOf="@id/buttonNumberFive"
         app:layout_constraintTop_toBottomOf="@+id/buttonNumberThree"/>
 
+    <Button
+        android:id="@+id/buttonSimbolMultiply"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:text="@string/SimbolMultiply"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="0dp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSimbolSubtract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonNumberSix"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSimbolClean"/>
+
+
 
     <Button
         android:id="@+id/buttonSimbolSubtract"
@@ -136,7 +152,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toEndOf="@id/buttonNumberSix"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSimbolClean" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSimbolMultiply" />
 
     <Button
         android:id="@+id/buttonNumberSeven"
@@ -192,6 +208,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonNumberSix"
         app:layout_constraintTop_toBottomOf="@+id/buttonSimbolSubtract"/>
+
 
     <Button
         android:id="@+id/buttonSimbolEqual"
