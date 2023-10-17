@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         for (Button s : simbols) {
             s.setOnClickListener(view -> {
                 String operante = s.getText().toString();
-
+                boolean invalid = false;
 
                     if (calc.isEmpty()) {
                         // Si la lista está vacía, agrega el número seguido del operador
@@ -99,12 +99,22 @@ public class MainActivity extends AppCompatActivity {
                             calc.add(operante);
                             calc.add(valueNumber);
                         }
+                    }else {
+                        // Verifica si el último elemento de la lista es un operador
+                        String lastItem = calc.get(calc.size() - 1);
+                        if (isOperator(lastItem)) {
+                            // El operador es inválido
+                            invalid = true;
+                        } else {
+                            // Agrega el operador
+                            calc.add(operante);
+                        }
                     }
-                    resultView.setText(resultView.getText().toString() + s.getText().toString()); // Limpia la pantalla
+
+                    if(!invalid)
+                        resultView.setText(resultView.getText().toString() + s.getText().toString()); // Limpia la pantalla
+
                 valueNumber = "";
-
-
-
             });
         }
 
