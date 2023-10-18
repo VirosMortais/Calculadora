@@ -55,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
      * @see #onNumberButtonClick(View)
      * @see #onOperationButtonClick(View)
      * @see #isOperator(String)
-     * @see #onCreate(Bundle)
      */
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
