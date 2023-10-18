@@ -1,24 +1,16 @@
 package com.example.calculadora;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class CalculatorTest {
+import java.util.List;
+
+public class CalculatorTest {
 
     @Test
-    void sum() {
-        System.out.println("Test");
+    void name() {
+        System.out.println("Teste 1");
     }
 
-    @Test
-    void rest() {
-    }
-
-    @Test
-    void mult() {
-        //double a = Calculator.mult();
-        //assertEquals(6, a);
-    }
 }

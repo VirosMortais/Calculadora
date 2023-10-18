@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:gravity="center_vertical|center_horizontal"
-        android:onClick="addChar"
+        android:onClick="onNumberButtonClick"
         android:padding="0dp"
         android:text="@string/NumberOne"
         android:textSize="30sp"
